@@ -1,0 +1,391 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>分布式 &mdash; AgentScope  文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c9484b72" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=7d86a446"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="参与贡献" href="contribute.html" />
+    <link rel="prev" title="监控器" href="207-monitor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" > 
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AgentScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div> <!-- language_selector.html -->
+<div class="language-selector">
+    <a href="../../en/tutorial/208-distribute.html">English</a></li> |
+    <a href="../../zh_CN/tutorial/208-distribute.html">中文</a></li>
+</div> 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">AgentScope 教程</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">快速上手</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="advance.html">进阶使用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="201-agent.html">定制你自己的Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="202-pipeline.html">Pipeline 和 MsgHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="203-model.html">模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="204-service.html">服务函数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="205-memory.html">记忆</a></li>
+<li class="toctree-l2"><a class="reference internal" href="206-prompt.html">提示工程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="207-monitor.html">监控器</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">分布式</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">使用方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">步骤1: 转化为分布式版本</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">步骤2: 编排分布式应用流程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">实现原理</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">参与贡献</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AgentScope API 文档</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.html">agentscope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.message.html">agentscope.message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.models.html">agentscope.models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.agents.html">agentscope.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.memory.html">agentscope.memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.parsers.html">agentscope.parsers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.exception.html">agentscope.exception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.pipelines.html">agentscope.pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.service.html">agentscope.service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.rpc.html">agentscope.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.web.html">agentscope.web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.prompt.html">agentscope.prompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.utils.html">agentscope.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AgentScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="advance.html">进阶使用</a></li>
+      <li class="breadcrumb-item active">分布式</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/208-distribute.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="distribute-zh">
+<span id="id1"></span><h1>分布式<a class="headerlink" href="#distribute-zh" title="Link to this heading"></a></h1>
+<p>AgentScope实现了基于Actor模式的智能体分布式部署和并行优化，并提供以下的特点：</p>
+<ul class="simple">
+<li><p><strong>自动并行优化</strong>：运行时自动实现应用并行优化，无需额外优化成本；</p></li>
+<li><p><strong>应用编写中心化</strong>：无需分布式背景知识，轻松编排分布式应用程序流程；</p></li>
+<li><p><strong>零成本自动迁移</strong>：中心化的Multi-Agent应用可以轻松转化成分布式模式</p></li>
+</ul>
+<p>本教程将详细介绍AgentScope分布式的实现原理和使用方法。</p>
+<section id="id2">
+<h2>使用方法<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>AgentScope中，我们将运行应用流程的进程称为<strong>主进程 (Main Process)</strong>，而所有的智能体都会运行在额外的 <strong>智能体服务器进程 (Agent Server Process)</strong> 中。
+根据主进程域智能体服务器进程之间的关系，AgentScope 为每个 Agent 提供了两种启动模式：<strong>子进程模式 (Child)</strong> 和 <strong>独立进程模式 (Indpendent)</strong>。
+子进程模式中，开发者可以从主进程中启动所有的智能体服务器进程，而独立进程模式中，智能体服务器进程相对主进程来说是独立的，需要在对应的机器上启动智能体服务器进程。</p>
+<p>上述概念有些复杂，但是不用担心，对于应用开发者而言，仅需将已有的智能体转化为对应的分布式版本，其余操作都和正常的单机版本完全一致。</p>
+<section id="id3">
+<h3>步骤1: 转化为分布式版本<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>AgentScope 中所有智能体都可以通过 <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.AgentBase.to_dist" title="agentscope.agents.AgentBase.to_dist"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_dist</span></code></a> 方法转化为对应的分布式版本。
+但需要注意，你的智能体必须继承自 <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.AgentBase" title="agentscope.agents.AgentBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">agentscope.agents.AgentBase</span></code></a> 类，因为是 <code class="docutils literal notranslate"><span class="pre">AgentBase</span></code> 提供了 <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> 方法。</p>
+<p>假设有两个智能体类<code class="docutils literal notranslate"><span class="pre">AgentA</span></code>和<code class="docutils literal notranslate"><span class="pre">AgentB</span></code>，它们都继承自 <code class="docutils literal notranslate"><span class="pre">AgentBase</span></code>。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>接下来我们将介绍如何将智能体转化到两种分布式模式。</p>
+<section id="id4">
+<h4>子进程模式<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>要使用该模式，你只需要调用各智能体的 <code class="docutils literal notranslate"><span class="pre">to_dist()</span></code> 方法，并且不需要提供任何参数。
+AgentScope 会自动帮你从主进程中启动智能体服务器进程并将智能体部署到对应的子进程上。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subprocess mode</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">()</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h4>独立进程模式<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<p>在独立进程模式中，需要首先在目标机器上启动智能体服务器进程。
+例如想要将两个智能体服务进程部署在 IP 分别为 <code class="docutils literal notranslate"><span class="pre">ip_a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">ip_b</span></code> 的机器上（假设这两台机器分别为<code class="docutils literal notranslate"><span class="pre">Machine1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Machine2</span></code>）。
+你可以先在 <code class="docutils literal notranslate"><span class="pre">Machine1</span></code> 上运行如下代码：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import some packages</span>
+
+<span class="n">agentscope</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+<span class="c1"># Create an agent service process</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">RpcAgentServerLauncher</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_a&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12001</span><span class="p">,</span>  <span class="c1"># choose an available port</span>
+<span class="p">)</span>
+
+<span class="c1"># Start the service</span>
+<span class="n">server</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">wait_until_terminate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>之后在 <code class="docutils literal notranslate"><span class="pre">Machine2</span></code> 上运行如下代码：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import some packages</span>
+
+<span class="n">agentscope</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+<span class="c1"># Create an agent service process</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">RpcAgentServerLauncher</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span> <span class="c1"># choose an available port</span>
+<span class="p">)</span>
+
+<span class="c1"># Start the service</span>
+<span class="n">server</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">wait_until_terminate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>接下来，就可以使用如下代码从主进程中连接这两个智能体服务器进程。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_a&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12001</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>上述代码将会把 <code class="docutils literal notranslate"><span class="pre">AgentA</span></code> 部署到 <code class="docutils literal notranslate"><span class="pre">Machine1</span></code> 的智能体服务器进程上，并将 <code class="docutils literal notranslate"><span class="pre">AgentB</span></code> 部署到 <code class="docutils literal notranslate"><span class="pre">Machine2</span></code> 的智能体服务器进程上。
+开发者在这之后只需要用中心化的方法编排各智能体的交互逻辑即可。</p>
+</section>
+<section id="to-dist">
+<h4><code class="docutils literal notranslate"><span class="pre">to_dist</span></code> 进阶用法<a class="headerlink" href="#to-dist" title="Link to this heading"></a></h4>
+<p>上面介绍的案例都是将一个已经初始化的 Agent 通过 <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.AgentBase.to_dist" title="agentscope.agents.AgentBase.to_dist"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_dist</span></code></a> 方法转化为其分布式版本，相当于要执行两次初始化操作，一次在主进程中，一次在智能体进程中。如果 Agent 的初始化过程耗时较长，直接使用 <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> 方法会严重影响运行效率。为此 AgentScope 也提供了在初始化 Agent 实例的同时将其转化为其分布式版本的方法，即在原 Agent 实例初始化时传入 <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> 参数。</p>
+<p>子进程模式下，只需要在 Agent 初始化函数中传入 <code class="docutils literal notranslate"><span class="pre">to_dist=True</span></code> 即可：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Child Process mode</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>独立进程模式下， 则需要将原来 <code class="docutils literal notranslate"><span class="pre">to_dist()</span></code> 函数的参数以 <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.DistConf" title="agentscope.agents.DistConf"><code class="xref py py-class docutils literal notranslate"><span class="pre">DistConf</span></code></a> 实例的形式传入 Agent 初始化函数的 <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> 域：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="n">DistConf</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_a&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">12001</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="n">DistConf</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>相较于原有的 <code class="docutils literal notranslate"><span class="pre">to_dist()</span></code> 函数调用，该方法只会在智能体进程中初始化一次 Agent，避免了重复初始化现象。</p>
+</section>
+</section>
+<section id="id6">
+<h3>步骤2: 编排分布式应用流程<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>在AgentScope中，分布式应用流程的编排和非分布式的程序完全一致，开发者可以用中心化的方式编写全部应用流程。
+同时，AgentScope允许本地和分布式部署的智能体混合使用，开发者不用特意区分哪些智能体是本地的，哪些是分布式部署的。</p>
+<p>以下是不同模式下实现两个智能体之间进行对话的全部代码，对比可见，AgentScope支持零代价将分布式应用流程从中心化向分布式迁移。</p>
+<ul class="simple">
+<li><p>智能体全部中心化：</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建智能体对象</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+
+<span class="c1"># 应用流程编排</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">while</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">content</span> <span class="o">==</span> <span class="s2">&quot;exit&quot;</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>智能体分布式部署</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">AgentA</span></code> 使用子进程模式部署</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AgentB</span></code> 使用独立进程模式部署</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建智能体对象</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">()</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># 应用流程编排</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">while</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">content</span> <span class="o">==</span> <span class="s2">&quot;exit&quot;</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>实现原理<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="actor">
+<h4>Actor模式<a class="headerlink" href="#actor" title="Link to this heading"></a></h4>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Actor_model">Actor模式</a>是大规模分布式系统中广泛使用的编程范式，同时也被应用于AgentScope平台的分布式设计中。
+在Actor模型中，一个actor是一个实体，它封装了自己的状态，并且仅通过消息传递与其他actor通信。</p>
+<p>在AgentScope的分布式模式中，每个Agent都是一个Actor，并通过消息与其他Agent交互。消息的流转暗示了Agent的执行顺序。每个Agent都有一个<code class="docutils literal notranslate"><span class="pre">reply</span></code>方法，它消费一条消息并生成另一条消息，生成的消息可以发送给其他 Agent。例如，下面的图表显示了多个Agent的工作流程。<code class="docutils literal notranslate"><span class="pre">A</span></code>~<code class="docutils literal notranslate"><span class="pre">F</span></code>都是Agent，箭头代表消息。</p>
+<div class="mermaid">
+            graph LR;
+A--&gt;B
+A--&gt;C
+B--&gt;D
+C--&gt;D
+E--&gt;F
+D--&gt;F
+        </div><p>其中，<code class="docutils literal notranslate"><span class="pre">B</span></code>和<code class="docutils literal notranslate"><span class="pre">C</span></code>可以在接收到来自<code class="docutils literal notranslate"><span class="pre">A</span></code>的消息后同时启动执行，而<code class="docutils literal notranslate"><span class="pre">E</span></code>可以立即运行，无需等待<code class="docutils literal notranslate"><span class="pre">A</span></code>、<code class="docutils literal notranslate"><span class="pre">B</span></code>、<code class="docutils literal notranslate"><span class="pre">C</span></code>和<code class="docutils literal notranslate"><span class="pre">D</span></code>。
+通过将每个Agent实现为一个Actor， Agent将自动等待其输入Msg准备好后开始执行<code class="docutils literal notranslate"><span class="pre">reply</span></code>方法，并且如果多个 Agent 的输入消息准备就绪，它们也可以同时自动执行<code class="docutils literal notranslate"><span class="pre">reply</span></code>，这避免了复杂的并行控制。</p>
+</section>
+<section id="placeholder">
+<h4>PlaceHolder<a class="headerlink" href="#placeholder" title="Link to this heading"></a></h4>
+<p>同时，为了支持中心化的应用编排，AgentScope 引入了 <a class="reference internal" href="../agentscope.message.html#agentscope.message.PlaceholderMessage" title="agentscope.message.PlaceholderMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">Placeholder</span></code></a> 这一概念。
+Placeholder 可以理解为消息的指针，指向消息真正产生的位置，其对外接口与传统模式中的消息完全一致，因此可以按照传统中心化的消息使用方式编排应用。
+Placeholder 内部包含了该消息产生方的联络方法，可以通过网络获取到被指向消息的真正值。
+每个分布式部署的 Agent 在收到其他 Agent 发来的消息时都会立即返回一个 Placeholder，从而避免阻塞请求发起方。
+而请求发起方可以借助返回的 Placeholder 在真正需要消息内容时再去向原 Agent 发起请求，请求发起方甚至可以将 Placholder 发送给其他 Agent 让其他 Agent 代为获取消息内容，从而减少消息真实内容的不必要转发。</p>
+<p>关于更加详细的技术实现方案，请参考我们的<a class="reference external" href="https://arxiv.org/abs/2402.14034">论文</a>。</p>
+</section>
+<section id="agent-server">
+<h4>Agent Server<a class="headerlink" href="#agent-server" title="Link to this heading"></a></h4>
+<p>Agent Server 也就是智能体服务器。在 AgentScope 中，Agent Server 提供了一个让不同 Agent 实例运行的平台。多个不同类型的 Agent 可以运行在同一个 Agent Server 中并保持独立的记忆以及其他本地状态信息，但是他们将共享同一份计算资源。
+只要没有对代码进行修改，一个已经启动的 Agent Server 可以为多个主流程提供服务。
+这意味着在运行多个应用时，只需要在第一次运行前启动 Agent Server，后续这些 Agent Server 进程就可以持续复用。</p>
+<p><a class="reference internal" href="#distribute-zh">[回到顶部]</a></p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="207-monitor.html" class="btn btn-neutral float-left" title="监控器" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="contribute.html" class="btn btn-neutral float-right" title="参与贡献" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, Alibaba Tongyi Lab。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

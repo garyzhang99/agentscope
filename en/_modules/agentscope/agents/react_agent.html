@@ -1,0 +1,395 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agentscope.agents.react_agent &mdash; AgentScope  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=c9484b72" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" > 
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            AgentScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div> <!-- language_selector.html -->
+<div class="language-selector">
+    <a href="../../../../en/_modules/agentscope/agents/react_agent.html">English</a></li> |
+    <a href="../../../../zh_CN/_modules/agentscope/agents/react_agent.html">中文</a></li>
+</div> 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AgentScope Tutorial</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/quick_start.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/advance.html">Advanced Exploration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorial/contribute.html">Get Involved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AgentScope API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.html">agentscope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.message.html">agentscope.message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.models.html">agentscope.models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.agents.html">agentscope.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.memory.html">agentscope.memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.parsers.html">agentscope.parsers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.exception.html">agentscope.exception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.pipelines.html">agentscope.pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.service.html">agentscope.service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.rpc.html">agentscope.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.web.html">agentscope.web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.prompt.html">agentscope.prompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../agentscope.utils.html">agentscope.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">AgentScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">agentscope.agents.react_agent</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for agentscope.agents.react_agent</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;An agent class that implements the ReAct algorithm. The agent will reason</span>
+<span class="sd">and act iteratively to solve problems. More details can be found in the paper</span>
+<span class="sd">https://arxiv.org/abs/2210.03629.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">loguru</span> <span class="kn">import</span> <span class="n">logger</span>
+
+<span class="kn">from</span> <span class="nn">agentscope.exception</span> <span class="kn">import</span> <span class="n">ResponseParsingError</span><span class="p">,</span> <span class="n">FunctionCallError</span>
+<span class="kn">from</span> <span class="nn">agentscope.agents</span> <span class="kn">import</span> <span class="n">AgentBase</span>
+<span class="kn">from</span> <span class="nn">agentscope.message</span> <span class="kn">import</span> <span class="n">Msg</span>
+<span class="kn">from</span> <span class="nn">agentscope.parsers</span> <span class="kn">import</span> <span class="n">MarkdownJsonDictParser</span>
+<span class="kn">from</span> <span class="nn">agentscope.service</span> <span class="kn">import</span> <span class="n">ServiceToolkit</span>
+<span class="kn">from</span> <span class="nn">agentscope.service.service_toolkit</span> <span class="kn">import</span> <span class="n">ServiceFunction</span>
+
+<span class="n">INSTRUCTION_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;## What You Should Do:</span>
+<span class="s2">1. First, analyze the current situation, and determine your goal.</span>
+<span class="s2">2. Then, check if your goal is already achieved. If so, try to generate a response. Otherwise, think about how to achieve it with the help of provided tool functions.</span>
+<span class="s2">3. Respond in the required format.</span>
+
+<span class="s2">## Note:</span>
+<span class="s2">1. Fully understand the tool functions and their arguments before using them.</span>
+<span class="s2">2. You should decide if you need to use the tool functions, if not then return an empty list in &quot;function&quot; field.</span>
+<span class="s2">3. Make sure the types and values of the arguments you provided to the tool functions are correct.</span>
+<span class="s2">4. Don&#39;t take things for granted. For example, where you are, what&#39;s the time now, etc. You can try to use the tool functions to get information.</span>
+<span class="s2">5. If the function execution fails, you should analyze the error and try to solve it.</span>
+<span class="s2">&quot;&quot;&quot;</span>  <span class="c1"># noqa</span>
+
+
+<div class="viewcode-block" id="ReActAgent">
+<a class="viewcode-back" href="../../../agentscope.agents.react_agent.html#agentscope.agents.ReActAgent">[docs]</a>
+<span class="k">class</span> <span class="nc">ReActAgent</span><span class="p">(</span><span class="n">AgentBase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An agent class that implements the ReAct algorithm. More details refer</span>
+<span class="sd">    to https://arxiv.org/abs/2210.03629.</span>
+
+<span class="sd">    Note this is an example implementation of ReAct algorithm in AgentScope.</span>
+<span class="sd">    We follow the idea within the paper, but the detailed prompt engineering</span>
+<span class="sd">    maybe different. Developers are encouraged to modify the prompt to fit</span>
+<span class="sd">    their own needs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ReActAgent.__init__">
+<a class="viewcode-back" href="../../../agentscope.agents.react_agent.html#agentscope.agents.ReActAgent.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">model_config_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">service_toolkit</span><span class="p">:</span> <span class="n">ServiceToolkit</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sys_prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;You&#39;re a helpful assistant. Your name is </span><span class="si">{name}</span><span class="s2">.&quot;</span><span class="p">,</span>
+        <span class="n">max_iters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the ReAct agent with the given name, model config name</span>
+<span class="sd">        and tools.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (`str`):</span>
+<span class="sd">                The name of the agent.</span>
+<span class="sd">            sys_prompt (`str`):</span>
+<span class="sd">                The system prompt of the agent.</span>
+<span class="sd">            model_config_name (`str`):</span>
+<span class="sd">                The name of the model config, which is used to load model from</span>
+<span class="sd">                configuration.</span>
+<span class="sd">            service_toolkit (`ServiceToolkit`):</span>
+<span class="sd">                A `ServiceToolkit` object that contains the tool functions.</span>
+<span class="sd">            max_iters (`int`, defaults to `10`):</span>
+<span class="sd">                The maximum number of iterations of the reasoning-acting loops.</span>
+<span class="sd">            verbose (`bool`, defaults to `True`):</span>
+<span class="sd">                Whether to print the detailed information during reasoning and</span>
+<span class="sd">                acting steps. If `False`, only the content in speak field will</span>
+<span class="sd">                be print out.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">sys_prompt</span><span class="o">=</span><span class="n">sys_prompt</span><span class="p">,</span>
+            <span class="n">model_config_name</span><span class="o">=</span><span class="n">model_config_name</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># TODO: To compatible with the old version, which will be deprecated</span>
+        <span class="c1">#  soon</span>
+        <span class="k">if</span> <span class="s2">&quot;tools&quot;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;The argument `tools` will be deprecated soon. &quot;</span>
+                <span class="s2">&quot;Please use `service_toolkit` instead. Example refers to &quot;</span>
+                <span class="s2">&quot;https://github.com/modelscope/agentscope/blob/main/&quot;</span>
+                <span class="s2">&quot;examples/conversation_with_react_agent/code/&quot;</span>
+                <span class="s2">&quot;conversation_with_react_agent.py&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">service_funcs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">func</span><span class="p">,</span> <span class="n">json_schema</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;tools&quot;</span><span class="p">]:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">json_schema</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+                <span class="n">service_funcs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ServiceFunction</span><span class="p">(</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">original_func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+                    <span class="n">processed_func</span><span class="o">=</span><span class="n">func</span><span class="p">,</span>
+                    <span class="n">json_schema</span><span class="o">=</span><span class="n">json_schema</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">service_toolkit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">service_toolkit</span> <span class="o">=</span> <span class="n">ServiceToolkit</span><span class="p">()</span>
+                <span class="n">service_toolkit</span><span class="o">.</span><span class="n">service_funcs</span> <span class="o">=</span> <span class="n">service_funcs</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">service_toolkit</span><span class="o">.</span><span class="n">service_funcs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">service_funcs</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">service_toolkit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The argument `service_toolkit` is required to initialize &quot;</span>
+                <span class="s2">&quot;the ReActAgent.&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">service_toolkit</span> <span class="o">=</span> <span class="n">service_toolkit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span> <span class="o">=</span> <span class="n">max_iters</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sys_prompt</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+            <span class="n">sys_prompt</span> <span class="o">=</span> <span class="n">sys_prompt</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">sys_prompt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="c1"># The brief intro of the role and target</span>
+                <span class="n">sys_prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                <span class="c1"># The instruction prompt for tools</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">service_toolkit</span><span class="o">.</span><span class="n">tools_instruction</span><span class="p">,</span>
+                <span class="c1"># The detailed instruction prompt for the agent</span>
+                <span class="n">INSTRUCTION_PROMPT</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Put sys prompt into memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Msg</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sys_prompt</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="s2">&quot;system&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Initialize a parser object to formulate the response from the model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">MarkdownJsonDictParser</span><span class="p">(</span>
+            <span class="n">content_hint</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;thought&quot;</span><span class="p">:</span> <span class="s2">&quot;what you thought&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;speak&quot;</span><span class="p">:</span> <span class="s2">&quot;what you speak&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;function&quot;</span><span class="p">:</span> <span class="n">service_toolkit</span><span class="o">.</span><span class="n">tools_calling_format</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">required_keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thought&quot;</span><span class="p">,</span> <span class="s2">&quot;speak&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ReActAgent.reply">
+<a class="viewcode-back" href="../../../agentscope.agents.react_agent.html#agentscope.agents.ReActAgent.reply">[docs]</a>
+    <span class="k">def</span> <span class="nf">reply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The reply function that achieves the ReAct algorithm.</span>
+<span class="sd">        The more details please refer to https://arxiv.org/abs/2210.03629&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iters</span><span class="p">):</span>
+            <span class="c1"># Step 1: Thought</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; ITER </span><span class="si">{</span><span class="n">_</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, STEP 1: REASONING &quot;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">))</span>
+
+            <span class="c1"># Prepare hint to remind model what the response format is</span>
+            <span class="c1"># Won&#39;t be recorded in memory to save tokens</span>
+            <span class="n">hint_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span>
+                <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">format_instruction</span><span class="p">,</span>
+                <span class="n">role</span><span class="o">=</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">hint_msg</span><span class="p">)</span>
+
+            <span class="c1"># Prepare prompt for the model</span>
+            <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(),</span> <span class="n">hint_msg</span><span class="p">)</span>
+
+            <span class="c1"># Generate and parse the response</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span>
+                    <span class="n">prompt</span><span class="p">,</span>
+                    <span class="n">parse_func</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">,</span>
+                    <span class="n">max_retries</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Record the response in memory</span>
+                <span class="n">msg_response</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;assistant&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">msg_response</span><span class="p">)</span>
+
+                <span class="c1"># Print out the response</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">msg_response</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span>
+                        <span class="n">Msg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;speak&quot;</span><span class="p">],</span> <span class="s2">&quot;assistant&quot;</span><span class="p">),</span>
+                    <span class="p">)</span>
+
+                <span class="c1"># Skip the next steps if no need to call tools</span>
+                <span class="c1"># The parsed field is a dictionary</span>
+                <span class="n">arg_function</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg_function</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="n">arg_function</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;[]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+                    <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg_function</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+                    <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">arg_function</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+                <span class="p">):</span>
+                    <span class="c1"># Only the speak field is exposed to users or other agents</span>
+                    <span class="k">return</span> <span class="n">Msg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;speak&quot;</span><span class="p">],</span> <span class="s2">&quot;assistant&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Only catch the response parsing error and expose runtime</span>
+            <span class="c1"># errors to developers for debugging</span>
+            <span class="k">except</span> <span class="n">ResponseParsingError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Print out raw response from models for developers to debug</span>
+                <span class="n">response_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">raw_response</span><span class="p">,</span> <span class="s2">&quot;assistant&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">response_msg</span><span class="p">)</span>
+
+                <span class="c1"># Re-correct by model itself</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="s2">&quot;system&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">add</span><span class="p">([</span><span class="n">response_msg</span><span class="p">,</span> <span class="n">error_msg</span><span class="p">])</span>
+
+                <span class="c1"># Skip acting step to re-correct the response</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Step 2: Acting</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; ITER </span><span class="si">{</span><span class="n">_</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">, STEP 2: ACTING &quot;</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">))</span>
+
+            <span class="c1"># Parse, check and execute the tool functions in service toolkit</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">execute_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">service_toolkit</span><span class="o">.</span><span class="n">parse_and_call_func</span><span class="p">(</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">parsed</span><span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">],</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Note: Observing the execution results and generate response</span>
+                <span class="c1"># are finished in the next reasoning step. We just put the</span>
+                <span class="c1"># execution results into memory, and wait for the next loop</span>
+                <span class="c1"># to generate response.</span>
+
+                <span class="c1"># Record execution results into memory as system message</span>
+                <span class="n">msg_res</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="n">execute_results</span><span class="p">,</span> <span class="s2">&quot;system&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">msg_res</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">msg_res</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="n">FunctionCallError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="c1"># Catch the function calling error that can be handled by</span>
+                <span class="c1"># the model</span>
+                <span class="n">error_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span><span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="s2">&quot;system&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+
+        <span class="c1"># Exceed the maximum iterations</span>
+        <span class="n">hint_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span>
+            <span class="s2">&quot;system&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;You have failed to generate a response in the maximum &quot;</span>
+            <span class="s2">&quot;iterations. Now generate a reply by summarizing the current &quot;</span>
+            <span class="s2">&quot;situation.&quot;</span><span class="p">,</span>
+            <span class="n">role</span><span class="o">=</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">hint_msg</span><span class="p">)</span>
+
+        <span class="c1"># Generate a reply by summarizing the current situation</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_memory</span><span class="p">(),</span> <span class="n">hint_msg</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+        <span class="n">res_msg</span> <span class="o">=</span> <span class="n">Msg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;assistant&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speak</span><span class="p">(</span><span class="n">res_msg</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">res_msg</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alibaba Tongyi Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

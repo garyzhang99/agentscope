@@ -1,0 +1,386 @@
+<!-- layout.html -->
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Distribution &mdash; AgentScope  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=c9484b72" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Get Involved" href="contribute.html" />
+    <link rel="prev" title="Monitor" href="207-monitor.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" > 
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AgentScope
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div> <!-- language_selector.html -->
+<div class="language-selector">
+    <a href="../../en/tutorial/208-distribute.html">English</a></li> |
+    <a href="../../zh_CN/tutorial/208-distribute.html">中文</a></li>
+</div> 
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">AgentScope Tutorial</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="advance.html">Advanced Exploration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="201-agent.html">Customizing Your Own Agent</a></li>
+<li class="toctree-l2"><a class="reference internal" href="202-pipeline.html">Pipeline and MsgHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="203-model.html">Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="204-service.html">Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="205-memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="206-prompt.html">Prompt Engineering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="207-monitor.html">Monitor</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Distribution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Get Involved</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">AgentScope API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.html">agentscope</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.message.html">agentscope.message</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.models.html">agentscope.models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.agents.html">agentscope.agents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.memory.html">agentscope.memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.parsers.html">agentscope.parsers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.exception.html">agentscope.exception</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.pipelines.html">agentscope.pipelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.service.html">agentscope.service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.rpc.html">agentscope.rpc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.web.html">agentscope.web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.prompt.html">agentscope.prompt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../agentscope.utils.html">agentscope.utils</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AgentScope</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="advance.html">Advanced Exploration</a></li>
+      <li class="breadcrumb-item active">Distribution</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/208-distribute.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="distribution">
+<span id="distribute-en"></span><h1>Distribution<a class="headerlink" href="#distribution" title="Link to this heading"></a></h1>
+<p>AgentScope implements an Actor-based distributed deployment and parallel optimization, providing the following features:</p>
+<ul class="simple">
+<li><p><strong>Automatic Parallel Optimization</strong>: Automatically optimize the application for parallelism at runtime without additional optimization costs;</p></li>
+<li><p><strong>Centralized Application Writing</strong>: Easily orchestrate distributed application flow without distributed background knowledge;</p></li>
+<li><p><strong>Zero-Cost Automatic Migration</strong>: Centralized Multi-Agent applications can be easily converted to distributed mode</p></li>
+</ul>
+<p>This tutorial will introduce the implementation and usage of AgentScope distributed in detail.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>In AgentScope, the process that runs the application flow is called the <strong>main process</strong>, and each agent can run in a separate process named <strong>agent server process</strong>.
+According to the different relationships between the main process and the agent server process, AgentScope supports two modes for each agent: <strong>Child Process</strong> and <strong>Independent Process</strong> mode.</p>
+<ul class="simple">
+<li><p>In the Child Process Mode, agent server processes will be automatically started as sub-processes from the main process.</p></li>
+<li><p>While in the Independent Process Mode, the agent server process is independent of the main process and developers need to start the agent server process on the corresponding machine.</p></li>
+</ul>
+<p>The above concepts may seem complex, but don’t worry, for application developers, you only need to convert your existing agent to its distributed version.</p>
+<section id="step-1-convert-your-agent-to-its-distributed-version">
+<h3>Step 1: Convert your agent to its distributed version<a class="headerlink" href="#step-1-convert-your-agent-to-its-distributed-version" title="Link to this heading"></a></h3>
+<p>All agents in AgentScope can automatically convert to its distributed version by calling its <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.AgentBase.to_dist" title="agentscope.agents.AgentBase.to_dist"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_dist</span></code></a> method.
+But note that your agent must inherit from the <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.AgentBase" title="agentscope.agents.AgentBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">agentscope.agents.AgentBase</span></code></a> class, because the <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> method is provided by the <code class="docutils literal notranslate"><span class="pre">AgentBase</span></code> class.</p>
+<p>Suppose there are two agent classes <code class="docutils literal notranslate"><span class="pre">AgentA</span></code> and <code class="docutils literal notranslate"><span class="pre">AgentB</span></code>, both of which inherit from <code class="docutils literal notranslate"><span class="pre">AgentBase</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Next we will introduce the conversion details of both modes.</p>
+<section id="child-process-mode">
+<h4>Child Process Mode<a class="headerlink" href="#child-process-mode" title="Link to this heading"></a></h4>
+<p>To use this mode, you only need to call each agent’s <code class="docutils literal notranslate"><span class="pre">to_dist()</span></code> method without any input parameter. AgentScope will automatically start all agent server processes from the main process.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Child Process mode</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">()</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="independent-process-mode">
+<h4>Independent Process Mode<a class="headerlink" href="#independent-process-mode" title="Link to this heading"></a></h4>
+<p>In the Independent Process Mode, we need to start the agent server process on the target machine first.
+For example, start two agent server processes on the two different machines with IP <code class="docutils literal notranslate"><span class="pre">ip_a</span></code> and <code class="docutils literal notranslate"><span class="pre">ip_b</span></code>(called <code class="docutils literal notranslate"><span class="pre">Machine1</span></code> and <code class="docutils literal notranslate"><span class="pre">Machine2</span></code> accrodingly).
+You can run the following code on <code class="docutils literal notranslate"><span class="pre">Machine1</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import some packages</span>
+
+<span class="n">agentscope</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+<span class="c1"># Create an agent service process</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">RpcAgentServerLauncher</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_a&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12001</span><span class="p">,</span>  <span class="c1"># choose an available port</span>
+<span class="p">)</span>
+
+<span class="c1"># Start the service</span>
+<span class="n">server</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">wait_until_terminate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And run the following code on <code class="docutils literal notranslate"><span class="pre">Machine2</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># import some packages</span>
+
+<span class="n">agentscope</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+<span class="c1"># Create an agent service process</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">RpcAgentServerLauncher</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span> <span class="c1"># choose an available port</span>
+<span class="p">)</span>
+
+<span class="c1"># Start the service</span>
+<span class="n">server</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">wait_until_terminate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, you can connect to the agent servers from the main process with the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_a&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12001</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The above code will deploy <code class="docutils literal notranslate"><span class="pre">AgentA</span></code> on the agent server process of <code class="docutils literal notranslate"><span class="pre">Machine1</span></code> and <code class="docutils literal notranslate"><span class="pre">AgentB</span></code> on the agent server process of <code class="docutils literal notranslate"><span class="pre">Machine2</span></code>.
+And developers just need to write the application flow in a centralized way in the main process.</p>
+</section>
+<section id="advanced-usage-of-to-dist">
+<h4>Advanced Usage of <code class="docutils literal notranslate"><span class="pre">to_dist</span></code><a class="headerlink" href="#advanced-usage-of-to-dist" title="Link to this heading"></a></h4>
+<p>All examples described above convert initialized agents into their distributed version through the <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.AgentBase.to_dist" title="agentscope.agents.AgentBase.to_dist"><code class="xref py py-func docutils literal notranslate"><span class="pre">to_dist</span></code></a> method, which is equivalent to initialize the agent twice, once in the main process and once in the agent server process.
+For agents whose initialization process is time-consuming, the <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> method is inefficient. Therefore, AgentScope also provides a method to convert the Agent instance into its distributed version while initializing it, that is, passing in <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> parameter to the Agent’s initialization function.</p>
+<p>In Child Process Mode, just pass <code class="docutils literal notranslate"><span class="pre">to_dist=True</span></code> to the Agent’s initialization function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Child Process mode</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In Independent Process Mode, you need to encapsulate the parameters of the <code class="docutils literal notranslate"><span class="pre">to_dist()</span></code> method in  <a class="reference internal" href="../agentscope.agents.html#agentscope.agents.DistConf" title="agentscope.agents.DistConf"><code class="xref py py-class docutils literal notranslate"><span class="pre">DistConf</span></code></a> instance and pass it into the <code class="docutils literal notranslate"><span class="pre">to_dist</span></code> field, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="n">DistConf</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_a&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">12001</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+    <span class="n">to_dist</span><span class="o">=</span><span class="n">DistConf</span><span class="p">(</span>
+        <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Compared with the original <code class="docutils literal notranslate"><span class="pre">to_dist()</span></code> function call, this method just initializes the agent once in the agent server process.</p>
+</section>
+</section>
+<section id="step-2-orchestrate-distributed-application-flow">
+<h3>Step 2: Orchestrate Distributed Application Flow<a class="headerlink" href="#step-2-orchestrate-distributed-application-flow" title="Link to this heading"></a></h3>
+<p>In AgentScope, the orchestration of distributed application flow is exactly the same as non-distributed programs, and developers can write the entire application flow in a centralized way.
+At the same time, AgentScope allows the use of a mixture of locally and distributed deployed agents, and developers do not need to distinguish which agents are local and which are distributed.</p>
+<p>The following is the complete code for two agents to communicate with each other in different modes. It can be seen that AgentScope supports zero-cost migration of distributed application flow from centralized to distributed.</p>
+<ul class="simple">
+<li><p>All agents are centralized</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create agent objects</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span>
+
+<span class="c1"># Application flow orchestration</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">while</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">content</span> <span class="o">==</span> <span class="s2">&quot;exit&quot;</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Agents are deployed in a distributed manner</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">AgentA</span></code> in Child Process mode</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AgentB</span></code> in Independent Process Mode</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create agent objects</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">AgentA</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">()</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">AgentB</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+    <span class="c1"># ...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to_dist</span><span class="p">(</span>
+    <span class="n">host</span><span class="o">=</span><span class="s2">&quot;ip_b&quot;</span><span class="p">,</span>
+    <span class="n">port</span><span class="o">=</span><span class="mi">12002</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Application flow orchestration</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">while</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">content</span> <span class="o">==</span> <span class="s2">&quot;exit&quot;</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="about-implementation">
+<h3>About Implementation<a class="headerlink" href="#about-implementation" title="Link to this heading"></a></h3>
+<section id="actor-model">
+<h4>Actor Model<a class="headerlink" href="#actor-model" title="Link to this heading"></a></h4>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Actor_model">The Actor model</a> is a widely used programming paradigm in large-scale distributed systems, and it is also applied in the distributed design of the AgentScope platform.</p>
+<p>In the distributed mode of AgentScope, each Agent is an Actor and interacts with other Agents through messages. The flow of messages implies the execution order of the Agents. Each Agent has a <code class="docutils literal notranslate"><span class="pre">reply</span></code> method, which consumes a message and generates another message, and the generated message can be sent to other Agents. For example, the following chart shows the workflow of multiple Agents. <code class="docutils literal notranslate"><span class="pre">A</span></code>~<code class="docutils literal notranslate"><span class="pre">F</span></code> are all Agents, and the arrows represent messages.</p>
+<div class="mermaid">
+            graph LR;
+A--&gt;B
+A--&gt;C
+B--&gt;D
+C--&gt;D
+E--&gt;F
+D--&gt;F
+        </div><p>Specifically, <code class="docutils literal notranslate"><span class="pre">B</span></code> and <code class="docutils literal notranslate"><span class="pre">C</span></code> can start execution simultaneously after receiving the message from <code class="docutils literal notranslate"><span class="pre">A</span></code>, and <code class="docutils literal notranslate"><span class="pre">E</span></code> can run immediately without waiting for <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, <code class="docutils literal notranslate"><span class="pre">C,</span></code> and <code class="docutils literal notranslate"><span class="pre">D</span></code>.
+By implementing each Agent as an Actor, an Agent will automatically wait for its input <code class="docutils literal notranslate"><span class="pre">Msg</span></code> before starting to execute the <code class="docutils literal notranslate"><span class="pre">reply</span></code> method, and multiple Agents can also automatically execute <code class="docutils literal notranslate"><span class="pre">reply</span></code> at the same time if their input messages are ready, which avoids complex parallel control and makes things simple.</p>
+</section>
+<section id="placeholder">
+<h4>PlaceHolder<a class="headerlink" href="#placeholder" title="Link to this heading"></a></h4>
+<p>Meanwhile, to support centralized application orchestration, AgentScope introduces the concept of <a class="reference internal" href="../agentscope.message.html#agentscope.message.PlaceholderMessage" title="agentscope.message.PlaceholderMessage"><code class="xref py py-class docutils literal notranslate"><span class="pre">Placeholder</span></code></a>.
+A Placeholder is a special message that contains the address and port number of the agent that generated the placeholder, which is used to indicate that the output message of the Agent is not ready yet.
+When calling the <code class="docutils literal notranslate"><span class="pre">reply</span></code> method of a distributed agent, a placeholder is returned immediately without blocking the main process.
+The interface of placeholder is exactly the same as the message, so that the orchestration flow can be written in a centralized way.
+When getting values from a placeholder, the placeholder will send a request to get the real values from the source agent.
+A placeholder itself is also a message, and it can be sent to other agents, and let other agents to get the real values, which can avoid sending the real values multiple times.</p>
+<p>About more detailed technical implementation solutions, please refer to our <a class="reference external" href="https://arxiv.org/abs/2402.14034">paper</a>.</p>
+</section>
+<section id="agent-server">
+<h4>Agent Server<a class="headerlink" href="#agent-server" title="Link to this heading"></a></h4>
+<p>In agentscope, the agent server provides a running platform for various types of agents.
+Multiple agents can run in the same agent server and hold independent memory and other local states but they will share the same computation resources.
+As long as the code is not modified, an agent server can provide services for multiple main processes.
+This means that when running mutliple applications, you only need to start the agent server for the first time, and it can be reused subsequently.</p>
+<p><a class="reference internal" href="#distribute-en">[Back to the top]</a></p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="207-monitor.html" class="btn btn-neutral float-left" title="Monitor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contribute.html" class="btn btn-neutral float-right" title="Get Involved" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Alibaba Tongyi Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
