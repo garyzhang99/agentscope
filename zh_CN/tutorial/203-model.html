@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="服务函数" href="204-service.html" />
+    <link rel="next" title="模型结果解析" href="203-parser.html" />
     <link rel="prev" title="Pipeline 和 MsgHub" href="202-pipeline.html" /> 
 </head>
 
@@ -67,6 +67,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#model-wrapper">创建自己的Model Wrapper</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="203-parser.html">模型结果解析</a></li>
 <li class="toctree-l2"><a class="reference internal" href="204-service.html">服务函数</a></li>
 <li class="toctree-l2"><a class="reference internal" href="205-memory.html">记忆</a></li>
 <li class="toctree-l2"><a class="reference internal" href="206-prompt.html">提示工程</a></li>
@@ -130,6 +131,7 @@
 <li><p>Gemini API，包括对话（Chat）和嵌入（Embedding）。</p></li>
 <li><p>ZhipuAi API，包括对话（Chat）和嵌入（Embedding）。</p></li>
 <li><p>Ollama API，包括对话（Chat），嵌入（Embedding）和生成（Generation）。</p></li>
+<li><p>LiteLLM API, 包括对话（Chat）, 支持各种模型的API.</p></li>
 <li><p>Post请求API，基于Post请求实现的模型推理服务，包括Huggingface/ModelScope
 Inference API和各种符合Post请求格式的API。</p></li>
 </ul>
@@ -292,13 +294,19 @@ API如下：</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;ollama_generate&quot;</span></code></p></td>
 <td><p>llama2, …</p></td>
 </tr>
-<tr class="row-even"><td><p>Post Request based API</p></td>
+<tr class="row-even"><td><p>LiteLLM API</p></td>
+<td><p>Chat</p></td>
+<td><p><a class="reference external" href="https://github.com/modelscope/agentscope/blob/main/src/agentscope/models/litellm_model.py"><code class="docutils literal notranslate"><span class="pre">LiteLLMChatWrapper</span></code></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;litellm_chat&quot;</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post Request based API</p></td>
 <td><p>-</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/agentscope/blob/main/src/agentscope/models/post_model.py"><code class="docutils literal notranslate"><span class="pre">PostAPIModelWrapperBase</span></code></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;post_api&quot;</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td><p></p></td>
+<tr class="row-even"><td><p></p></td>
 <td><p>Chat</p></td>
 <td><p><a class="reference external" href="https://github.com/modelscope/agentscope/blob/main/src/agentscope/models/post_model.py"><code class="docutils literal notranslate"><span class="pre">PostAPIChatModelWrapper</span></code></a></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">&quot;post_api_chat&quot;</span></code></p></td>
@@ -588,6 +596,21 @@ API如下：</p>
 </details>
 <br/>
 </section>
+<section id="litellm-chat-api">
+<h4>LiteLLM Chat API<a class="headerlink" href="#litellm-chat-api" title="Link to this heading"></a></h4>
+<details>
+<summary>LiteLLM Chat API (<code><a href="https://github.
+com/modelscope/agentscope/blob/main/src/agentscope/models/litellm_model.py">agentscope.models.LiteLLMChatModelWrapper</a></code>)</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;config_name&quot;</span><span class="p">:</span> <span class="s2">&quot;lite_llm_openai_chat_gpt-3.5-turbo&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_type&quot;</span><span class="p">:</span> <span class="s2">&quot;litellm_chat&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;gpt-3.5-turbo&quot;</span> <span class="c1"># You should note that for different models, you should set the corresponding environment variables, such as OPENAI_API_KEY, etc. You may refer to https://docs.litellm.ai/docs/ for this.</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+</details>
+<br/>
+</section>
 <section id="post-request-api">
 <h4>Post Request API<a class="headerlink" href="#post-request-api" title="Link to this heading"></a></h4>
 <details>
@@ -695,7 +718,7 @@ com/modelscope/agentscope/blob/main/src/agentscope/models/post_model.py">agentsc
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="202-pipeline.html" class="btn btn-neutral float-left" title="Pipeline 和 MsgHub" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="204-service.html" class="btn btn-neutral float-right" title="服务函数" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="203-parser.html" class="btn btn-neutral float-right" title="模型结果解析" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
